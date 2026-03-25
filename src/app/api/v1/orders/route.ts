@@ -2,19 +2,18 @@ import { desc, eq, and } from 'drizzle-orm';
 import { z } from 'zod';
 import { db } from '@/lib/db';
 import { orders, orderItems, products } from '@/lib/db/schema';
-import { withAuth } from '@/lib/api/middleware';
+import { withUser } from '@/lib/api/middleware';
 import { ok, err } from '@/lib/api/response';
 
-export const GET = withAuth(async (_req, _ctx, session) => {
-  const orgId = session.session.activeOrganizationId;
-
-  if (!orgId) return ok([]);
-
+export const GET = withUser(async (_req, _ctx, session, memberRecord) => {
   const ordersList = await db
     .select()
     .from(orders)
     .where(
-      and(eq(orders.userId, session.user.id), eq(orders.organizationId, orgId)),
+      and(
+        eq(orders.userId, session.user.id),
+        eq(orders.organizationId, memberRecord.organizationId),
+      ),
     )
     .orderBy(desc(orders.createdAt))
     .limit(50);
@@ -27,19 +26,15 @@ const CreateOrderSchema = z.object({
   quantity: z.number().int().min(1).max(999),
 });
 
-export const POST = withAuth(async (req, _ctx, session) => {
-  const orgId = session.session.activeOrganizationId;
-  if (!orgId) {
-    return err('No active organization. Select an organization first.', 400);
-  }
-
+export const POST = withUser(async (req, _ctx, session, memberRecord) => {
   const body = await req.json().catch(() => null);
   const parsed = CreateOrderSchema.safeParse(body);
   if (!parsed.success) {
-    return err(parsed.error.errors[0]?.message ?? 'Validation error', 422);
+    return err(422, parsed.error.errors[0]?.message ?? 'Validation error');
   }
 
   const { productId, quantity } = parsed.data;
+  const orgId = memberRecord.organizationId;
 
   const [product] = await db
     .select()
@@ -47,7 +42,7 @@ export const POST = withAuth(async (req, _ctx, session) => {
     .where(and(eq(products.id, productId), eq(products.organizationId, orgId)))
     .limit(1);
 
-  if (!product) return err('Product not found', 404);
+  if (!product) return err(404, 'Product not found');
 
   const unitPrice = parseFloat(product.price);
   const total = (unitPrice * quantity).toFixed(2);
@@ -70,5 +65,5 @@ export const POST = withAuth(async (req, _ctx, session) => {
     unitPrice: product.price,
   });
 
-  return ok(order, 201);
+  return ok(order);
 });

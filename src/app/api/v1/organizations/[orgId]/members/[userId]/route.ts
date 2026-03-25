@@ -1,9 +1,9 @@
 import { headers } from 'next/headers';
 import { auth } from '@/features/auth/lib/auth';
-import { withAuth } from '@/lib/api/middleware';
+import { withAdmin } from '@/lib/api/middleware';
 import { ok } from '@/lib/api/response';
 
-export const DELETE = withAuth(async (_req, ctx, _session) => {
+export const DELETE = withAdmin(async (_req, ctx, _session, _member) => {
   const { orgId, userId } = await ctx.params;
 
   await auth.api.removeMember({

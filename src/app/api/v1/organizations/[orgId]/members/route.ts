@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { auth } from '@/features/auth/lib/auth';
 import { db } from '@/lib/db';
 import { member, user } from '@/lib/db/schema';
-import { withAuth } from '@/lib/api/middleware';
+import { withUser, withAdmin } from '@/lib/api/middleware';
 import { ok, created, err } from '@/lib/api/response';
 
 const InviteMemberBodySchema = z.object({
@@ -12,7 +12,7 @@ const InviteMemberBodySchema = z.object({
   role: z.enum(['owner', 'admin', 'member', 'viewer']),
 });
 
-export const GET = withAuth(async (_req, ctx, _session) => {
+export const GET = withUser(async (_req, ctx, _session, _member) => {
   const { orgId } = await ctx.params;
 
   const members = await db
@@ -35,7 +35,7 @@ export const GET = withAuth(async (_req, ctx, _session) => {
   return ok(members);
 });
 
-export const POST = withAuth(async (req, ctx, _session) => {
+export const POST = withAdmin(async (req, ctx, _session, _member) => {
   const { orgId } = await ctx.params;
 
   const body = await req.json().catch(() => null);

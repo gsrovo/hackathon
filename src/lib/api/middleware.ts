@@ -35,7 +35,11 @@ export function withAuth(handler: AuthedHandler) {
 export function withRole(allowedRoles: Role[], handler: RoleHandler) {
   return withAuth(async (req, ctx, session) => {
     const params = await ctx.params;
-    const orgId = params?.orgId ?? req.headers.get('x-org-id') ?? null;
+    const orgId =
+      params?.orgId ??
+      req.headers.get('x-org-id') ??
+      session.session.activeOrganizationId ??
+      null;
 
     if (!orgId) return err(400, 'Organization ID is required');
 
@@ -57,4 +61,19 @@ export function withRole(allowedRoles: Role[], handler: RoleHandler) {
 
     return handler(req, ctx, session, memberRecord);
   });
+}
+
+/** Any org member (member, admin, owner) */
+export function withUser(handler: RoleHandler) {
+  return withRole(['owner', 'admin', 'member'], handler);
+}
+
+/** Admin or owner only */
+export function withAdmin(handler: RoleHandler) {
+  return withRole(['owner', 'admin'], handler);
+}
+
+/** Owner only */
+export function withOwner(handler: RoleHandler) {
+  return withRole(['owner'], handler);
 }

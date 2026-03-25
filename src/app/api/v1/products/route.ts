@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { db } from '@/lib/db';
 import { products } from '@/lib/db/schema';
-import { withAuth } from '@/lib/api/middleware';
+import { withUser, withAdmin } from '@/lib/api/middleware';
 import { ok, created, err } from '@/lib/api/response';
 
 const CreateProductBodySchema = z.object({
@@ -13,28 +13,16 @@ const CreateProductBodySchema = z.object({
   stock: z.number().int().optional(),
 });
 
-export const GET = withAuth(async (_req, _ctx, session) => {
-  const orgId = session.session.activeOrganizationId;
-
-  if (!orgId) {
-    return ok([]);
-  }
-
+export const GET = withUser(async (_req, _ctx, _session, memberRecord) => {
   const productsList = await db
     .select()
     .from(products)
-    .where(eq(products.organizationId, orgId));
+    .where(eq(products.organizationId, memberRecord.organizationId));
 
   return ok(productsList);
 });
 
-export const POST = withAuth(async (req, _ctx, session) => {
-  const orgId = session.session.activeOrganizationId;
-
-  if (!orgId) {
-    return err(400, 'No active organization selected');
-  }
-
+export const POST = withAdmin(async (req, _ctx, _session, memberRecord) => {
   const body = await req.json().catch(() => null);
   const parsed = CreateProductBodySchema.safeParse(body);
 
@@ -47,7 +35,7 @@ export const POST = withAuth(async (req, _ctx, session) => {
   const [product] = await db
     .insert(products)
     .values({
-      organizationId: orgId,
+      organizationId: memberRecord.organizationId,
       name,
       price,
       description: description ?? null,
