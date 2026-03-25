@@ -143,17 +143,10 @@
 ## Commands
 
 ```bash
-# Generate migration files from schema changes
-pnpm drizzle-kit generate
-
-# Apply pending migrations
-pnpm drizzle-kit migrate
-
-# Open visual database browser
-pnpm drizzle-kit studio
-
-# Check migration status
-pnpm drizzle-kit status
+pnpm db:generate   # Generate migration files from schema changes
+pnpm db:migrate    # Apply pending migrations to the database
+pnpm db:check      # Check for schema/migration inconsistencies
+pnpm db:studio     # Open visual database browser (Drizzle Studio)
 ```
 
 ## Connection
