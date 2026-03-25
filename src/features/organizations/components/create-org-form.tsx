@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -42,12 +42,14 @@ export function CreateOrgForm() {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CreateOrgValues>({
     resolver: zodResolver(createOrgSchema),
     defaultValues: { name: '', slug: '' },
   });
+
+  const slugValue = useWatch({ control, name: 'slug' });
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     const nameValue = e.target.value;
@@ -83,8 +85,6 @@ export function CreateOrgForm() {
     router.push(`/organizations/${org.id}`);
     router.refresh();
   }
-
-  const slugValue = watch('slug');
 
   return (
     <Card>
