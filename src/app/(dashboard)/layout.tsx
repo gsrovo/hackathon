@@ -8,8 +8,8 @@ import {
   Building2,
   User,
   Settings,
-  LogOut,
 } from 'lucide-react';
+import { SignOutButton } from '@/features/auth/components/sign-out-button';
 import {
   Sidebar,
   SidebarContent,
@@ -133,12 +133,9 @@ export default async function DashboardLayout({
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    render={<Link href="/api/auth/sign-out" />}
+                    render={<SignOutButton variant="menu-item" />}
                     className="text-destructive gap-2"
-                  >
-                    <LogOut className="size-4" />
-                    Sign out
-                  </DropdownMenuItem>
+                  />
                 </DropdownMenuContent>
               </DropdownMenu>
             </SidebarMenuItem>

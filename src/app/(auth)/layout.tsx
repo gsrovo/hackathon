@@ -1,8 +1,14 @@
-export default function AuthLayout({
+import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
+import { auth } from '@/features/auth/lib/auth';
+
+export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (session) redirect('/dashboard');
   return (
     <div className="flex min-h-screen">
       {/* Brand panel — always dark */}

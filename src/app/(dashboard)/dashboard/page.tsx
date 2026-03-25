@@ -4,7 +4,7 @@ import { ShoppingBag, Building2 } from 'lucide-react';
 import { auth } from '@/features/auth/lib/auth';
 import { db } from '@/lib/db';
 import { orders } from '@/lib/db/schema';
-import { eq, desc, count } from 'drizzle-orm';
+import { eq, desc, count, and } from 'drizzle-orm';
 import { PageHeader } from '@/components/shared/page-header';
 import { StatsCard } from '@/features/dashboard/components/stats-card';
 import { RecentOrdersWidget } from '@/features/dashboard/components/recent-orders-widget';
@@ -14,17 +14,22 @@ export default async function DashboardPage() {
 
   if (!session) redirect('/sign-in');
 
-  const { user } = session;
+  const { user, session: sessionData } = session;
+  const activeOrganizationId = sessionData.activeOrganizationId;
+
+  const orderFilter = activeOrganizationId
+    ? and(
+        eq(orders.userId, user.id),
+        eq(orders.organizationId, activeOrganizationId),
+      )
+    : eq(orders.userId, user.id);
 
   const [orderCountResult, recentOrders, orgList] = await Promise.all([
-    db
-      .select({ count: count() })
-      .from(orders)
-      .where(eq(orders.userId, user.id)),
+    db.select({ count: count() }).from(orders).where(orderFilter),
     db
       .select()
       .from(orders)
-      .where(eq(orders.userId, user.id))
+      .where(orderFilter)
       .orderBy(desc(orders.createdAt))
       .limit(5),
     auth.api.listOrganizations({ headers: await headers() }),
@@ -45,7 +50,11 @@ export default async function DashboardPage() {
           <StatsCard
             title="Total Orders"
             value={orderCount}
-            description="All orders placed under your account"
+            description={
+              activeOrganizationId
+                ? 'Orders in the active organization'
+                : 'All orders placed under your account'
+            }
             icon={ShoppingBag}
           />
           <StatsCard

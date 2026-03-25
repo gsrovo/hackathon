@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { SignOutButton } from '@/features/auth/components/sign-out-button';
 
 export default async function SettingsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -89,13 +90,7 @@ export default async function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button
-                variant="destructive"
-                size="sm"
-                render={<Link href="/api/auth/sign-out" />}
-              >
-                Sign out
-              </Button>
+              <SignOutButton />
             </CardContent>
           </Card>
         </div>
