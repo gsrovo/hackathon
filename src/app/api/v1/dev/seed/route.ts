@@ -52,11 +52,14 @@ export const POST = withAuth(async (_req, _ctx, session) => {
     return err(400, 'No active organization. Select an organization first.');
   }
 
+  const suffix = orgId.slice(0, 6).toUpperCase();
+
   const inserted = await db
     .insert(products)
     .values(
       SAMPLE_PRODUCTS.map((p) => ({
         ...p,
+        sku: `${p.sku}-${suffix}`,
         organizationId: orgId,
         status: 'active' as const,
       })),
