@@ -49,7 +49,7 @@ const SAMPLE_PRODUCTS = [
 export const POST = withAuth(async (_req, _ctx, session) => {
   const orgId = session.session.activeOrganizationId;
   if (!orgId) {
-    return err('No active organization. Select an organization first.', 400);
+    return err(400, 'No active organization. Select an organization first.');
   }
 
   const inserted = await db
@@ -61,7 +61,8 @@ export const POST = withAuth(async (_req, _ctx, session) => {
         status: 'active' as const,
       })),
     )
+    .onConflictDoNothing()
     .returning({ id: products.id, name: products.name });
 
-  return ok({ seeded: inserted.length, products: inserted }, 201);
+  return ok({ seeded: inserted.length, products: inserted });
 });
