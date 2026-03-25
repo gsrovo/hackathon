@@ -58,7 +58,7 @@ export function RecentOrdersWidget({ orders }: RecentOrdersWidgetProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-heading text-base font-light tracking-wide">
+        <CardTitle className="font-heading text-base font-semibold tracking-tight">
           Recent Orders
         </CardTitle>
       </CardHeader>

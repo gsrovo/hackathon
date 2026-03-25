@@ -22,7 +22,7 @@ export function OrgCard({ org, memberCount }: OrgCardProps) {
     <Link href={`/organizations/${org.id}`} className="group block">
       <Card className="group-hover:border-primary/40 transition-colors">
         <CardHeader className="pb-3">
-          <CardTitle className="font-heading text-xl font-light tracking-wide">
+          <CardTitle className="font-heading text-xl font-semibold tracking-tight">
             {org.name}
           </CardTitle>
           {org.slug && (

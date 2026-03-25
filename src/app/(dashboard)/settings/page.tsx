@@ -29,7 +29,7 @@ export default async function SettingsPage() {
           {/* Profile section */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-heading text-xl font-light tracking-wide">
+              <CardTitle className="font-heading text-xl font-semibold tracking-tight">
                 Profile
               </CardTitle>
               <CardDescription className="tracking-wide">
@@ -46,7 +46,7 @@ export default async function SettingsPage() {
           {/* Session section */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-heading text-xl font-light tracking-wide">
+              <CardTitle className="font-heading text-xl font-semibold tracking-tight">
                 Session
               </CardTitle>
               <CardDescription className="tracking-wide">
@@ -82,7 +82,7 @@ export default async function SettingsPage() {
           {/* Account section */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-heading text-xl font-light tracking-wide">
+              <CardTitle className="font-heading text-xl font-semibold tracking-tight">
                 Account
               </CardTitle>
               <CardDescription className="tracking-wide">

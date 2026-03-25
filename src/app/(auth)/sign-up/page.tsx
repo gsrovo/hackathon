@@ -14,12 +14,10 @@ export default function SignUpPage() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="font-heading text-3xl font-light tracking-wide">
+        <CardTitle className="font-heading text-3xl font-semibold tracking-tight">
           Join Maison
         </CardTitle>
-        <CardDescription className="tracking-wide">
-          Create your exclusive account
-        </CardDescription>
+        <CardDescription>Create your exclusive account</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <GoogleOAuthButton />

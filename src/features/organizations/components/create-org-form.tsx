@@ -89,7 +89,7 @@ export function CreateOrgForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-heading text-2xl font-light tracking-wide">
+        <CardTitle className="font-heading text-2xl font-semibold tracking-tight">
           Create organization
         </CardTitle>
         <CardDescription className="tracking-wide">

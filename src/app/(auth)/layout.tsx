@@ -64,14 +64,14 @@ export default async function AuthLayout({
         />
 
         {/* Brand wordmark */}
-        <span className="text-gradient font-heading relative text-2xl tracking-[0.35em] uppercase">
+        <span className="text-gradient font-heading relative text-2xl font-semibold tracking-[0.35em] uppercase">
           Maison
         </span>
 
         {/* Hero copy */}
         <div className="relative">
           <p
-            className="font-heading text-[3.5rem] leading-[1.08] font-light"
+            className="font-heading text-[3.5rem] leading-[1.08] font-semibold"
             style={{ color: 'oklch(0.96 0.005 275 / 90%)' }}
           >
             Intelligence

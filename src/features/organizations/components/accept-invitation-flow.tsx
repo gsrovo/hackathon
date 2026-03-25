@@ -70,7 +70,7 @@ export function AcceptInvitationFlow({
     return (
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="font-heading text-xl font-light tracking-wide">
+          <CardTitle className="font-heading text-xl font-semibold tracking-tight">
             Organization invite
           </CardTitle>
           <CardDescription className="tracking-wide">
@@ -84,7 +84,7 @@ export function AcceptInvitationFlow({
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="font-heading text-xl font-light tracking-wide">
+        <CardTitle className="font-heading text-xl font-semibold tracking-tight">
           Join organization
         </CardTitle>
         <CardDescription className="tracking-wide">

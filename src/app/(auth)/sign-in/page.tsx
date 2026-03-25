@@ -14,12 +14,10 @@ export default function SignInPage() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="font-heading text-3xl font-light tracking-wide">
+        <CardTitle className="font-heading text-3xl font-semibold tracking-tight">
           Welcome back
         </CardTitle>
-        <CardDescription className="tracking-wide">
-          Sign in to your account
-        </CardDescription>
+        <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <GoogleOAuthButton />

@@ -40,7 +40,7 @@ export function ProductCard({
 
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-2">
-          <CardTitle className="font-heading text-base leading-snug font-light tracking-wide">
+          <CardTitle className="font-heading text-base leading-snug font-semibold tracking-tight">
             {name}
           </CardTitle>
           <span className="text-primary font-mono text-sm font-medium tabular-nums">

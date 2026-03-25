@@ -90,7 +90,7 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
         {/* Org details */}
         <Card className="max-w-2xl">
           <CardHeader>
-            <CardTitle className="font-heading text-xl font-light tracking-wide">
+            <CardTitle className="font-heading text-xl font-semibold tracking-tight">
               Details
             </CardTitle>
           </CardHeader>
@@ -131,7 +131,7 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
         {canManage && (
           <Card className="max-w-2xl">
             <CardHeader>
-              <CardTitle className="font-heading text-xl font-light tracking-wide">
+              <CardTitle className="font-heading text-xl font-semibold tracking-tight">
                 Invite by link
               </CardTitle>
               <CardDescription className="tracking-wide">
@@ -148,7 +148,7 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
         {canManage && (
           <Card className="max-w-2xl">
             <CardHeader>
-              <CardTitle className="font-heading text-xl font-light tracking-wide">
+              <CardTitle className="font-heading text-xl font-semibold tracking-tight">
                 Pending invitations
               </CardTitle>
               <CardDescription className="tracking-wide">
@@ -167,7 +167,7 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
         {/* Members */}
         <Card className="max-w-2xl">
           <CardHeader>
-            <CardTitle className="font-heading text-xl font-light tracking-wide">
+            <CardTitle className="font-heading text-xl font-semibold tracking-tight">
               Members
             </CardTitle>
             <CardDescription className="tracking-wide">

@@ -16,13 +16,13 @@ export function StatsCard({
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
-        <CardTitle className="text-muted-foreground text-sm font-normal tracking-widest uppercase">
+        <CardTitle className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
           {title}
         </CardTitle>
         {Icon && <Icon className="text-primary/70 size-4 shrink-0" />}
       </CardHeader>
       <CardContent className="flex flex-col gap-1">
-        <p className="font-heading text-primary text-4xl font-light tracking-tight">
+        <p className="font-heading text-primary text-5xl font-bold tracking-tight">
           {value}
         </p>
         {description && (
