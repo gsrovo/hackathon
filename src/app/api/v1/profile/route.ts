@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { user } from '@/lib/db/schema';
 import { withAuth } from '@/lib/api/middleware';
 import { ok, err } from '@/lib/api/response';
+import { zodFirstIssueMessage } from '@/lib/zod-error-message';
 
 const UpdateProfileSchema = z
   .object({
@@ -29,7 +30,7 @@ export const PATCH = withAuth(async (req, _ctx, session) => {
   const parsed = UpdateProfileSchema.safeParse(body);
 
   if (!parsed.success) {
-    return err(parsed.error.errors[0]?.message ?? 'Validation error', 422);
+    return err(422, zodFirstIssueMessage(parsed.error));
   }
 
   const updates: Partial<typeof user.$inferInsert> = {};

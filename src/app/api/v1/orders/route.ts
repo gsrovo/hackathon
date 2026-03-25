@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { orders, orderItems, products } from '@/lib/db/schema';
 import { withUser } from '@/lib/api/middleware';
 import { ok, err } from '@/lib/api/response';
+import { zodFirstIssueMessage } from '@/lib/zod-error-message';
 
 export const GET = withUser(async (_req, _ctx, session, memberRecord) => {
   const ordersList = await db
@@ -30,7 +31,7 @@ export const POST = withUser(async (req, _ctx, session, memberRecord) => {
   const body = await req.json().catch(() => null);
   const parsed = CreateOrderSchema.safeParse(body);
   if (!parsed.success) {
-    return err(422, parsed.error.errors[0]?.message ?? 'Validation error');
+    return err(422, zodFirstIssueMessage(parsed.error));
   }
 
   const { productId, quantity } = parsed.data;

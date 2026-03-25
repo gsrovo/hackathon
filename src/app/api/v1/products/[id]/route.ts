@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { products } from '@/lib/db/schema';
 import { withUser, withAdmin } from '@/lib/api/middleware';
 import { ok, err } from '@/lib/api/response';
+import { zodFirstIssueMessage } from '@/lib/zod-error-message';
 
 const UpdateProductBodySchema = z.object({
   name: z.string().min(1).optional(),
@@ -41,7 +42,7 @@ export const PATCH = withAdmin(async (req, ctx, _session, memberRecord) => {
   const parsed = UpdateProductBodySchema.safeParse(body);
 
   if (!parsed.success) {
-    return err(422, parsed.error.errors[0]?.message ?? 'Validation error');
+    return err(422, zodFirstIssueMessage(parsed.error));
   }
 
   const [updated] = await db

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { auth } from '@/features/auth/lib/auth';
 import { withAuth } from '@/lib/api/middleware';
 import { ok, created, err } from '@/lib/api/response';
+import { zodFirstIssueMessage } from '@/lib/zod-error-message';
 
 const CreateOrganizationBodySchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -21,7 +22,7 @@ export const POST = withAuth(async (req, _ctx, _session) => {
   const parsed = CreateOrganizationBodySchema.safeParse(body);
 
   if (!parsed.success) {
-    return err(422, parsed.error.errors[0]?.message ?? 'Validation error');
+    return err(422, zodFirstIssueMessage(parsed.error));
   }
 
   const org = await auth.api.createOrganization({

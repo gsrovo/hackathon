@@ -6,6 +6,7 @@ import { db } from '@/lib/db';
 import { member, user } from '@/lib/db/schema';
 import { withUser, withAdmin } from '@/lib/api/middleware';
 import { ok, created, err } from '@/lib/api/response';
+import { zodFirstIssueMessage } from '@/lib/zod-error-message';
 
 const InviteMemberBodySchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -42,7 +43,7 @@ export const POST = withAdmin(async (req, ctx, _session, _member) => {
   const parsed = InviteMemberBodySchema.safeParse(body);
 
   if (!parsed.success) {
-    return err(422, parsed.error.errors[0]?.message ?? 'Validation error');
+    return err(422, zodFirstIssueMessage(parsed.error));
   }
 
   const invitation = await auth.api.createInvitation({
