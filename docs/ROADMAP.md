@@ -34,16 +34,16 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [ ] Update `src/lib/db/schema/index.ts`
 - [ ] Run `pnpm drizzle-kit generate && pnpm drizzle-kit migrate`
 
-### Phase 3 — OpenAPI / Swagger Setup
+### Phase 3 — OpenAPI / Swagger Setup ✅
 
 > Single source of truth for API contracts
 
-- [ ] Install `@asteasolutions/zod-to-openapi`, `swagger-ui-react`
-- [ ] `src/lib/api/openapi/registry.ts` — central OpenAPI registry
-- [ ] `src/lib/api/openapi/spec.ts` — generates and caches the JSON spec
-- [ ] `src/lib/api/openapi/schemas/common.schemas.ts`
-- [ ] `src/app/api/docs/route.ts` — serves OpenAPI JSON
-- [ ] `src/app/api-docs/page.tsx` — Swagger UI ("use client")
+- [x] Install `@asteasolutions/zod-to-openapi`, `swagger-ui-react`
+- [x] `src/lib/api/openapi/registry.ts` — central OpenAPI registry
+- [x] `src/lib/api/openapi/spec.ts` — generates and caches the JSON spec
+- [x] `src/lib/api/openapi/schemas/common.schemas.ts`
+- [x] `src/app/api/docs/route.ts` — serves OpenAPI JSON
+- [x] `src/app/api-docs/page.tsx` — Swagger UI ("use client")
 
 ### Phase 4 — Auth UI
 
