@@ -15,33 +15,33 @@ export default function Home() {
           </Link>
           <nav className="flex items-center gap-2">
             <Button variant="ghost" render={<Link href="/sign-in" />}>
-              Entrar
+              Sign in
             </Button>
-            <Button render={<Link href="/store" />}>Loja de testes</Button>
+            <Button render={<Link href="/store" />}>Test store</Button>
           </nav>
         </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 items-center px-6 py-16">
         <section className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
-          <Badge variant="outline">Ambiente de demonstracao</Badge>
+          <Badge variant="outline">Demo environment</Badge>
           <h1 className="font-heading text-4xl leading-tight font-semibold sm:text-5xl">
-            Explore a nossa loja de testes
+            Explore our test store
           </h1>
           <p className="text-muted-foreground text-base sm:text-lg">
-            Navegue pelo catalogo, simule pedidos e valide o fluxo completo da
-            plataforma em um ambiente pronto para experimentar.
+            Browse the catalog, simulate orders, and validate the complete
+            platform flow in an environment ready to experiment with.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Button size="lg" render={<Link href="/store" />}>
-              Acessar loja
+              Open store
             </Button>
             <Button
               variant="outline"
               size="lg"
               render={<Link href="/sign-in" />}
             >
-              Fazer login
+              Sign in
             </Button>
           </div>
         </section>
