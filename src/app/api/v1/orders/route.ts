@@ -6,18 +6,16 @@ import { withAuth } from '@/lib/api/middleware';
 import { ok, err } from '@/lib/api/response';
 
 export const GET = withAuth(async (_req, _ctx, session) => {
-  const conditions = [eq(orders.userId, session.user.id)];
+  const orgId = session.session.activeOrganizationId;
 
-  if (session.session.activeOrganizationId) {
-    conditions.push(
-      eq(orders.organizationId, session.session.activeOrganizationId),
-    );
-  }
+  if (!orgId) return ok([]);
 
   const ordersList = await db
     .select()
     .from(orders)
-    .where(and(...conditions))
+    .where(
+      and(eq(orders.userId, session.user.id), eq(orders.organizationId, orgId)),
+    )
     .orderBy(desc(orders.createdAt))
     .limit(50);
 

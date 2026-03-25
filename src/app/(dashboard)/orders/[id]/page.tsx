@@ -42,10 +42,15 @@ export default async function OrderDetailPage({
 
   const { id } = await params;
 
+  const orgId = session.session.activeOrganizationId;
+
+  const conditions = [eq(orders.id, id), eq(orders.userId, session.user.id)];
+  if (orgId) conditions.push(eq(orders.organizationId, orgId));
+
   const [order] = await db
     .select()
     .from(orders)
-    .where(and(eq(orders.id, id), eq(orders.userId, session.user.id)))
+    .where(and(...conditions))
     .limit(1);
 
   if (!order) notFound();

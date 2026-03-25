@@ -1,6 +1,7 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { desc, eq } from 'drizzle-orm';
+import { desc, eq, and } from 'drizzle-orm';
+import { ShoppingBag } from 'lucide-react';
 import { auth } from '@/features/auth/lib/auth';
 import { db } from '@/lib/db';
 import { orders } from '@/lib/db/schema';
@@ -12,18 +13,44 @@ export default async function OrdersPage() {
 
   if (!session) redirect('/sign-in');
 
-  const ordersList = await db
-    .select()
-    .from(orders)
-    .where(eq(orders.userId, session.user.id))
-    .orderBy(desc(orders.createdAt))
-    .limit(50);
+  const orgId = session.session.activeOrganizationId;
+
+  const ordersList = orgId
+    ? await db
+        .select()
+        .from(orders)
+        .where(
+          and(
+            eq(orders.userId, session.user.id),
+            eq(orders.organizationId, orgId),
+          ),
+        )
+        .orderBy(desc(orders.createdAt))
+        .limit(50)
+    : [];
 
   return (
     <>
-      <PageHeader title="Orders" description="Your order history" />
+      <PageHeader
+        title="Orders"
+        description={
+          orgId
+            ? 'Orders for the active organization.'
+            : 'Select an organization to view its orders.'
+        }
+      />
       <div className="flex flex-1 flex-col gap-6 p-6 lg:p-10">
-        <OrdersTable orders={ordersList} />
+        {!orgId ? (
+          <div className="text-muted-foreground flex flex-col items-center gap-2 py-20 text-center text-sm">
+            <ShoppingBag className="mb-2 size-10 opacity-30" />
+            <p className="tracking-wide">No organization selected.</p>
+            <p className="text-xs opacity-60">
+              Use the switcher in the sidebar to activate one.
+            </p>
+          </div>
+        ) : (
+          <OrdersTable orders={ordersList} />
+        )}
       </div>
     </>
   );
