@@ -45,17 +45,17 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] `src/app/api/docs/route.ts` — serves OpenAPI JSON
 - [x] `src/app/api-docs/page.tsx` — Swagger UI ("use client")
 
-### Phase 4 — Auth UI
+### Phase 4 — Auth UI ✅
 
 > Sign-in, sign-up, Google OAuth button
 
-- [ ] Add shadcn: `form`, `input`, `label`, `card`, `separator`
-- [ ] `src/features/auth/components/sign-in-form.tsx`
-- [ ] `src/features/auth/components/sign-up-form.tsx`
-- [ ] `src/features/auth/components/google-oauth-button.tsx`
-- [ ] `src/features/auth/hooks/use-session.ts`
-- [ ] `src/app/(auth)/sign-in/page.tsx` + `sign-up/page.tsx`
-- [ ] `src/app/(auth)/layout.tsx`
+- [x] Add shadcn: `input`, `label`, `card`, `separator`
+- [x] `src/features/auth/components/sign-in-form.tsx`
+- [x] `src/features/auth/components/sign-up-form.tsx`
+- [x] `src/features/auth/components/google-oauth-button.tsx`
+- [x] `src/features/auth/hooks/use-session.ts`
+- [x] `src/app/(auth)/sign-in/page.tsx` + `sign-up/page.tsx`
+- [x] `src/app/(auth)/layout.tsx`
 
 ### Phase 5 — Dashboard Layout
 
