@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {
   LayoutDashboard,
   ShoppingBag,
+  Store,
   Building2,
   User,
   Settings,
@@ -35,6 +36,7 @@ import { auth } from '@/features/auth/lib/auth';
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { label: 'Store', href: '/store', icon: Store },
   { label: 'Orders', href: '/orders', icon: ShoppingBag },
   { label: 'Organizations', href: '/organizations', icon: Building2 },
   { label: 'Profile', href: '/profile', icon: User },

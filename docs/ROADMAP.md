@@ -128,6 +128,20 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] Account settings (session display, sign-out)
 - [x] Profile link from settings page
 
+### Phase 13 — Store & Add-to-Order ✅
+
+> Product catalog home; users browse and add products to a new order
+
+- [x] `src/app/(dashboard)/store/page.tsx` — RSC product grid, org-scoped
+- [x] `src/features/store/components/product-card.tsx` — name, price, stock badge, add-to-order button
+- [x] `src/features/store/components/add-to-order-button.tsx` — client; POST /api/v1/orders, success → link to order
+- [x] `src/features/store/components/seed-products-button.tsx` — creates 5 demo products via /api/v1/dev/seed
+- [x] `src/app/api/v1/orders/route.ts` — add POST handler (find product → create order + order_item atomically)
+- [x] `src/app/api/v1/dev/seed/route.ts` — seeds 5 sample active products for the active org
+- [x] Sidebar nav updated with "Store" link
+
+**Flow:** Select org → Store → click "Add to Order" → pending order created → link to order detail
+
 ---
 
 ## Architecture Decisions
@@ -162,7 +176,9 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 | GET           | `/api/v1/products`                             | member        |
 | POST          | `/api/v1/products`                             | admin         |
 | PATCH, DELETE | `/api/v1/products/:id`                         | admin / owner |
+| POST          | `/api/v1/orders`                               | authenticated |
 | GET           | `/api/docs`                                    | public        |
+| POST          | `/api/v1/dev/seed`                             | authenticated |
 
 ---
 
