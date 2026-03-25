@@ -3,6 +3,7 @@ import { registry } from './registry';
 
 // Side-effect imports — each file registers its routes into the registry
 import './schemas/common.schemas';
+import './schemas/auth.schemas';
 
 function buildSpec() {
   const generator = new OpenApiGeneratorV31(registry.definitions);

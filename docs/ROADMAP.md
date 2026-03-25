@@ -66,15 +66,14 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] `src/components/shared/user-avatar.tsx`
 - [x] `src/components/shared/page-header.tsx`
 
-### Phase 6 — Profile Feature
+### Phase 6 — Profile Feature ✅
 
 > View and edit user profile
 
-- [ ] `src/lib/api/openapi/schemas/auth.schemas.ts`
-- [ ] `src/app/api/v1/profile/route.ts` (`GET`, `PATCH` with `withAuth`)
-- [ ] `src/features/profile/components/profile-form.tsx`
-- [ ] `src/features/profile/components/avatar-upload.tsx`
-- [ ] `src/app/(dashboard)/profile/page.tsx`
+- [x] `src/lib/api/openapi/schemas/auth.schemas.ts`
+- [x] `src/app/api/v1/profile/route.ts` (`GET`, `PATCH` with `withAuth`)
+- [x] `src/features/profile/components/profile-form.tsx`
+- [x] `src/app/(dashboard)/profile/page.tsx`
 
 ### Phase 7 — Organizations Feature
 
