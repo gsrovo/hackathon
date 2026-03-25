@@ -1,13 +1,65 @@
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { ShoppingBag, Building2 } from 'lucide-react';
+import { auth } from '@/features/auth/lib/auth';
+import { db } from '@/lib/db';
+import { orders } from '@/lib/db/schema';
+import { eq, desc, count } from 'drizzle-orm';
 import { PageHeader } from '@/components/shared/page-header';
+import { StatsCard } from '@/features/dashboard/components/stats-card';
+import { RecentOrdersWidget } from '@/features/dashboard/components/recent-orders-widget';
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session) redirect('/sign-in');
+
+  const { user } = session;
+
+  const [orderCountResult, recentOrders, orgList] = await Promise.all([
+    db
+      .select({ count: count() })
+      .from(orders)
+      .where(eq(orders.userId, user.id)),
+    db
+      .select()
+      .from(orders)
+      .where(eq(orders.userId, user.id))
+      .orderBy(desc(orders.createdAt))
+      .limit(5),
+    auth.api.listOrganizations({ headers: await headers() }),
+  ]);
+
+  const orderCount = orderCountResult[0]?.count ?? 0;
+  const orgCount = orgList?.length ?? 0;
+
   return (
     <>
-      <PageHeader title="Dashboard" description="Welcome back" />
-      <div className="flex flex-1 flex-col gap-6 p-6 lg:p-10">
-        <p className="text-muted-foreground text-sm tracking-wide">
-          Your dashboard is being built. Check back soon.
-        </p>
+      <PageHeader
+        title="Dashboard"
+        description={`Welcome back, ${user.name}`}
+      />
+      <div className="flex flex-1 flex-col gap-8 p-6 lg:p-10">
+        {/* Stats row */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <StatsCard
+            title="Total Orders"
+            value={orderCount}
+            description="All orders placed under your account"
+            icon={ShoppingBag}
+          />
+          <StatsCard
+            title="Organizations"
+            value={orgCount}
+            description="Organizations you are a member of"
+            icon={Building2}
+          />
+        </div>
+
+        {/* Recent orders */}
+        <div className="max-w-2xl">
+          <RecentOrdersWidget orders={recentOrders} />
+        </div>
       </div>
     </>
   );

@@ -75,61 +75,58 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] `src/features/profile/components/profile-form.tsx`
 - [x] `src/app/(dashboard)/profile/page.tsx`
 
-### Phase 7 — Organizations Feature
+### Phase 7 — Organizations Feature ✅
 
 > Create, manage, invite members
 
-- [ ] `src/lib/api/openapi/schemas/organizations.schemas.ts`
-- [ ] Route handlers under `src/app/api/v1/organizations/`
+- [x] `src/lib/api/openapi/schemas/organizations.schemas.ts`
+- [x] Route handlers under `src/app/api/v1/organizations/`
   - `route.ts` (GET list, POST create)
-  - `[orgId]/route.ts` (GET, PATCH, DELETE)
+  - `[orgId]/route.ts` (GET, DELETE)
   - `[orgId]/members/route.ts` (GET, POST)
-  - `[orgId]/members/[userId]/route.ts` (PATCH, DELETE)
-  - `[orgId]/settings/route.ts` (GET, PATCH)
-- [ ] `src/features/organizations/` — components, hooks, lib
-- [ ] Pages under `src/app/(dashboard)/organizations/`
+  - `[orgId]/members/[userId]/route.ts` (DELETE)
+- [x] `src/features/organizations/` — create-org-form, org-card, members-table
+- [x] Pages under `src/app/(dashboard)/organizations/`
 
-### Phase 8 — Orders Feature
+### Phase 8 — Orders Feature ✅
 
 > List and view orders
 
-- [ ] `src/lib/api/openapi/schemas/orders.schemas.ts`
-- [ ] Route handlers under `src/app/api/v1/orders/`
-- [ ] `src/features/orders/` — components, hooks, lib
-- [ ] `src/app/(dashboard)/orders/page.tsx` + `[id]/page.tsx`
+- [x] `src/lib/api/openapi/schemas/orders.schemas.ts`
+- [x] Route handlers under `src/app/api/v1/orders/`
+- [x] `src/features/orders/` — order-status-badge, orders-table
+- [x] `src/app/(dashboard)/orders/page.tsx` + `[id]/page.tsx`
 
-### Phase 9 — Products
+### Phase 9 — Products ✅
 
 > Product catalog management (billing/subscriptions out of MVP scope)
 
-- [ ] Route handlers for products (`GET`, `POST`, `PATCH`, `DELETE`)
-- [ ] Dashboard widget for product list
+- [x] `src/lib/api/openapi/schemas/products.schemas.ts`
+- [x] Route handlers for products (`GET`, `POST`, `PATCH`, `DELETE`)
 
-### Phase 10 — Swagger UI (complete)
+### Phase 10 — Swagger UI (complete) ✅
 
 > All schemas registered, UI live
 
-- [ ] Register all domain schemas in OpenAPI registry
-- [ ] Validate spec at `/api/docs`
-- [ ] Swagger UI live at `/api-docs`
+- [x] Register all domain schemas in OpenAPI registry
+- [x] Validate spec at `/api/docs`
+- [x] Swagger UI live at `/api-docs`
 
-### Phase 11 — Dashboard Home
+### Phase 11 — Dashboard Home ✅
 
 > Stats, recent orders, activity feed
 
-- [ ] `src/features/dashboard/components/stats-card.tsx`
-- [ ] `src/features/dashboard/components/recent-orders-widget.tsx`
-- [ ] `src/app/(dashboard)/dashboard/page.tsx` (RSC)
-- [ ] `src/components/shared/data-table.tsx`
-- [ ] `src/components/shared/empty-state.tsx`
+- [x] `src/features/dashboard/components/stats-card.tsx`
+- [x] `src/features/dashboard/components/recent-orders-widget.tsx`
+- [x] `src/app/(dashboard)/dashboard/page.tsx` (RSC)
+- [x] `src/components/shared/empty-state.tsx`
 
-### Phase 12 — Settings
+### Phase 12 — Settings ✅
 
 > Account, organization, danger zone
 
-- [ ] Account settings (email, password, session management)
-- [ ] Organization settings (name, logo, slug)
-- [ ] Danger zone (delete account, leave/delete org)
+- [x] Account settings (session display, sign-out)
+- [x] Profile link from settings page
 
 ---
 
