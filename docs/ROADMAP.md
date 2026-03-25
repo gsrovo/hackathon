@@ -56,15 +56,15 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] `src/app/(auth)/sign-in/page.tsx` + `sign-up/page.tsx`
 - [x] `src/app/(auth)/layout.tsx`
 
-### Phase 5 — Dashboard Layout
+### Phase 5 — Dashboard Layout ✅
 
 > Session gate, sidebar, organization switcher
 
-- [ ] Add shadcn: `sidebar`, `avatar`, `dropdown-menu`, `badge`, `sheet`
-- [ ] `src/app/(dashboard)/layout.tsx` — RSC session gate (redirect to `/sign-in` if no session)
-- [ ] `src/components/shared/org-switcher.tsx` ("use client")
-- [ ] `src/components/shared/user-avatar.tsx`
-- [ ] `src/components/shared/page-header.tsx`
+- [x] Add shadcn: `sidebar`, `avatar`, `dropdown-menu`, `badge`, `sheet`
+- [x] `src/app/(dashboard)/layout.tsx` — RSC session gate (redirect to `/sign-in` if no session)
+- [x] `src/components/shared/org-switcher.tsx` ("use client")
+- [x] `src/components/shared/user-avatar.tsx`
+- [x] `src/components/shared/page-header.tsx`
 
 ### Phase 6 — Profile Feature
 
