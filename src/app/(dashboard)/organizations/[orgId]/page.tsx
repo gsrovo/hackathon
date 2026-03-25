@@ -3,6 +3,8 @@ import { redirect, notFound } from 'next/navigation';
 import { auth } from '@/features/auth/lib/auth';
 import { PageHeader } from '@/components/shared/page-header';
 import { MembersTable } from '@/features/organizations/components/members-table';
+import { InviteMemberForm } from '@/features/organizations/components/invite-member-form';
+import { PendingInvitationsTable } from '@/features/organizations/components/pending-invitations-table';
 import {
   Card,
   CardContent,
@@ -40,6 +42,43 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
 
   const createdDate =
     org.createdAt instanceof Date ? org.createdAt : new Date(org.createdAt);
+
+  let pendingInvitations: {
+    id: string;
+    email: string;
+    role: string | null;
+    status: string;
+    expiresAt: string | Date;
+  }[] = [];
+
+  if (canManage) {
+    try {
+      const invitations = await auth.api.listInvitations({
+        query: { organizationId: orgId },
+        headers: await headers(),
+      });
+      const list = Array.isArray(invitations) ? invitations : [];
+      pendingInvitations = list
+        .filter((i: { status: string }) => i.status === 'pending')
+        .map(
+          (i: {
+            id: string;
+            email: string;
+            role?: string | null;
+            status: string;
+            expiresAt: string | Date;
+          }) => ({
+            id: i.id,
+            email: i.email,
+            role: i.role ?? null,
+            status: i.status,
+            expiresAt: i.expiresAt,
+          }),
+        );
+    } catch {
+      pendingInvitations = [];
+    }
+  }
 
   return (
     <>
@@ -88,6 +127,42 @@ export default async function OrgDetailPage({ params }: OrgDetailPageProps) {
             </div>
           </CardContent>
         </Card>
+
+        {canManage && (
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle className="font-heading text-xl font-light tracking-wide">
+                Invite by link
+              </CardTitle>
+              <CardDescription className="tracking-wide">
+                Create an invitation for an email address and share the link
+                yourself. The invitee must sign in with that same email.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <InviteMemberForm orgId={orgId} />
+            </CardContent>
+          </Card>
+        )}
+
+        {canManage && (
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle className="font-heading text-xl font-light tracking-wide">
+                Pending invitations
+              </CardTitle>
+              <CardDescription className="tracking-wide">
+                Invitations that have not been accepted yet.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <PendingInvitationsTable
+                orgId={orgId}
+                initialInvitations={pendingInvitations}
+              />
+            </CardContent>
+          </Card>
+        )}
 
         {/* Members */}
         <Card className="max-w-2xl">

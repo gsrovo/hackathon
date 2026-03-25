@@ -7,10 +7,11 @@ import { member, user } from '@/lib/db/schema';
 import { withUser, withAdmin } from '@/lib/api/middleware';
 import { ok, created, err } from '@/lib/api/response';
 import { zodFirstIssueMessage } from '@/lib/zod-error-message';
+import { ORG_INVITE_ROLES } from '@/features/organizations/lib/invite-roles';
 
 const InviteMemberBodySchema = z.object({
   email: z.string().email('Invalid email address'),
-  role: z.enum(['owner', 'admin', 'member', 'viewer']),
+  role: z.enum(ORG_INVITE_ROLES),
 });
 
 export const GET = withUser(async (_req, ctx, _session, _member) => {
@@ -46,14 +47,20 @@ export const POST = withAdmin(async (req, ctx, _session, _member) => {
     return err(422, zodFirstIssueMessage(parsed.error));
   }
 
-  const invitation = await auth.api.createInvitation({
-    body: {
-      email: parsed.data.email,
-      role: parsed.data.role,
-      organizationId: orgId,
-    },
-    headers: await headers(),
-  });
+  try {
+    const invitation = await auth.api.createInvitation({
+      body: {
+        email: parsed.data.email,
+        role: parsed.data.role,
+        organizationId: orgId,
+      },
+      headers: await headers(),
+    });
 
-  return created(invitation);
+    return created(invitation);
+  } catch (e) {
+    const message =
+      e instanceof Error ? e.message : 'Failed to create invitation';
+    return err(400, message);
+  }
 });
