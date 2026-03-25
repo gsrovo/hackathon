@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { z } from 'zod/v3';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,7 +19,6 @@ import {
 
 const profileSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  image: z.string().url('Must be a valid URL').or(z.literal('')).optional(),
 });
 
 type ProfileValues = z.infer<typeof profileSchema>;
@@ -48,22 +48,16 @@ export function ProfileForm({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       name: initialName,
-      image: initialImage ?? '',
     },
   });
 
   async function onSubmit(values: ProfileValues) {
     setFeedback(null);
 
-    const payload: Record<string, string | null> = { name: values.name };
-    if (values.image !== undefined) {
-      payload.image = values.image === '' ? null : values.image;
-    }
-
     const res = await fetch('/api/v1/profile', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ name: values.name }),
     });
 
     if (!res.ok) {
@@ -86,11 +80,25 @@ export function ProfileForm({
           Personal information
         </CardTitle>
         <CardDescription className="tracking-wide">
-          Update your name and profile picture URL.
+          Update your name and profile picture.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+          {/* Avatar */}
+          {initialImage && (
+            <div className="flex items-center gap-3">
+              <Image
+                src={initialImage}
+                alt="Avatar"
+                width={48}
+                height={48}
+                className="rounded-full object-cover"
+                unoptimized
+              />
+            </div>
+          )}
+
           {/* Email — read-only */}
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="email">Email</Label>
@@ -119,20 +127,6 @@ export function ProfileForm({
             />
             {errors.name && (
               <p className="text-destructive text-sm">{errors.name.message}</p>
-            )}
-          </div>
-
-          {/* Avatar URL */}
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="image">Avatar URL</Label>
-            <Input
-              id="image"
-              type="url"
-              placeholder="https://example.com/avatar.png"
-              {...register('image')}
-            />
-            {errors.image && (
-              <p className="text-destructive text-sm">{errors.image.message}</p>
             )}
           </div>
 
