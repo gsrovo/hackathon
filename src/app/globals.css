@@ -49,113 +49,104 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ── Maison — Luxury E-Commerce ─────────────────────────────────────────────
-   Palette: Ivory × Deep Charcoal × Champagne Gold
+/* ── Maison — Neural Clarity ─────────────────────────────────────────────────
+   Light Intelligence × Luxury
+   Palette: Platinum White × Electric Violet × Champagne Gold
+   Dark sidebar + dark auth brand panel for maximum contrast
    ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
   /* Brand gold */
-  --gold: oklch(0.78 0.1 82);
+  --gold: oklch(0.72 0.1 82);
 
-  /* Surface */
-  --background: oklch(0.982 0.006 82); /* warm ivory */
-  --foreground: oklch(0.145 0.012 55); /* deep warm charcoal */
+  /* ── Surfaces — Light ── */
+  --background: oklch(0.975 0.004 280); /* very slightly violet-tinted white */
+  --foreground: oklch(0.1 0.02 280); /* deep dark */
 
-  /* Card / Popover */
-  --card: oklch(1 0.003 82);
-  --card-foreground: oklch(0.145 0.012 55);
-  --popover: oklch(1 0.003 82);
-  --popover-foreground: oklch(0.145 0.012 55);
+  /* Card */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1 0.02 280);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0.02 280);
 
-  /* Primary — charcoal CTAs */
-  --primary: oklch(0.18 0.014 55);
-  --primary-foreground: oklch(0.982 0.006 82);
+  /* ── Primary — Electric Violet ── */
+  --primary: oklch(0.58 0.26 280);
+  --primary-foreground: oklch(0.98 0 0);
 
-  /* Secondary — warm light surface */
-  --secondary: oklch(0.948 0.01 78);
-  --secondary-foreground: oklch(0.18 0.014 55);
+  /* ── Secondary ── */
+  --secondary: oklch(0.94 0.008 280);
+  --secondary-foreground: oklch(0.1 0.02 280);
 
-  /* Muted */
-  --muted: oklch(0.948 0.01 78);
-  --muted-foreground: oklch(0.52 0.014 58);
+  /* ── Muted ── */
+  --muted: oklch(0.94 0.008 280);
+  --muted-foreground: oklch(0.48 0.014 275);
 
-  /* Accent — champagne gold */
-  --accent: oklch(0.78 0.1 82);
-  --accent-foreground: oklch(0.145 0.012 55);
+  /* ── Accent — Champagne Gold ── */
+  --accent: oklch(0.72 0.1 82);
+  --accent-foreground: oklch(0.98 0 0);
 
-  /* Status */
+  /* ── Status ── */
   --destructive: oklch(0.577 0.245 27.325);
 
-  /* Chrome */
-  --border: oklch(0.9 0.01 78);
-  --input: oklch(0.9 0.01 78);
-  --ring: oklch(0.78 0.1 82); /* gold focus ring */
+  /* ── Chrome ── */
+  --border: oklch(0 0 0 / 8%);
+  --input: oklch(0 0 0 / 8%);
+  --ring: oklch(0.58 0.26 280);
 
-  /* Charts — warm monochrome */
-  --chart-1: oklch(0.78 0.1 82);
-  --chart-2: oklch(0.62 0.08 72);
-  --chart-3: oklch(0.48 0.06 62);
-  --chart-4: oklch(0.34 0.04 55);
-  --chart-5: oklch(0.22 0.02 50);
+  /* ── Charts ── */
+  --chart-1: oklch(0.58 0.26 280); /* violet */
+  --chart-2: oklch(0.72 0.1 82); /* gold */
+  --chart-3: oklch(0.5 0.2 200); /* teal */
+  --chart-4: oklch(0.65 0.18 340); /* rose */
+  --chart-5: oklch(0.4 0.12 280); /* deep violet */
 
-  /* Radius — editorial, sharper */
-  --radius: 0.25rem;
+  /* ── Radius — zero for maximum edge ── */
+  --radius: 0rem;
 
-  /* Sidebar — dark charcoal panel */
-  --sidebar: oklch(0.15 0.014 55);
-  --sidebar-foreground: oklch(0.93 0.008 78);
-  --sidebar-primary: oklch(0.78 0.1 82);
-  --sidebar-primary-foreground: oklch(0.15 0.014 55);
-  --sidebar-accent: oklch(0.22 0.014 55);
-  --sidebar-accent-foreground: oklch(0.93 0.008 78);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.78 0.1 82);
+  /* ── Sidebar — dark void panel (contrast with light content) ── */
+  --sidebar: oklch(0.055 0.016 280);
+  --sidebar-foreground: oklch(0.88 0.008 275);
+  --sidebar-primary: oklch(0.62 0.26 280);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.12 0.026 280);
+  --sidebar-accent-foreground: oklch(0.96 0.005 275);
+  --sidebar-border: oklch(1 0 0 / 6%);
+  --sidebar-ring: oklch(0.62 0.26 280);
 }
 
 .dark {
-  --gold: oklch(0.8 0.1 82);
-
-  --background: oklch(0.13 0.014 55);
-  --foreground: oklch(0.97 0.006 82);
-
-  --card: oklch(0.17 0.014 55);
-  --card-foreground: oklch(0.97 0.006 82);
-  --popover: oklch(0.17 0.014 55);
-  --popover-foreground: oklch(0.97 0.006 82);
-
-  /* Primary — gold CTAs in dark */
-  --primary: oklch(0.8 0.1 82);
-  --primary-foreground: oklch(0.13 0.014 55);
-
-  --secondary: oklch(0.22 0.014 55);
-  --secondary-foreground: oklch(0.97 0.006 82);
-
-  --muted: oklch(0.22 0.014 55);
-  --muted-foreground: oklch(0.64 0.012 65);
-
-  --accent: oklch(0.8 0.1 82);
-  --accent-foreground: oklch(0.13 0.014 55);
-
-  --destructive: oklch(0.704 0.191 22.216);
-
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.8 0.1 82);
-
-  --chart-1: oklch(0.8 0.1 82);
-  --chart-2: oklch(0.64 0.08 72);
-  --chart-3: oklch(0.5 0.06 62);
-  --chart-4: oklch(0.38 0.04 55);
-  --chart-5: oklch(0.26 0.02 50);
-
-  --sidebar: oklch(0.1 0.012 55);
-  --sidebar-foreground: oklch(0.93 0.008 78);
-  --sidebar-primary: oklch(0.8 0.1 82);
-  --sidebar-primary-foreground: oklch(0.13 0.014 55);
-  --sidebar-accent: oklch(0.18 0.014 55);
-  --sidebar-accent-foreground: oklch(0.93 0.008 78);
-  --sidebar-border: oklch(1 0 0 / 7%);
-  --sidebar-ring: oklch(0.8 0.1 82);
+  --gold: oklch(0.82 0.1 82);
+  --background: oklch(0.07 0.018 280);
+  --foreground: oklch(0.96 0.005 275);
+  --card: oklch(0.1 0.022 278);
+  --card-foreground: oklch(0.96 0.005 275);
+  --popover: oklch(0.11 0.022 278);
+  --popover-foreground: oklch(0.96 0.005 275);
+  --primary: oklch(0.62 0.26 280);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.13 0.022 280);
+  --secondary-foreground: oklch(0.96 0.005 275);
+  --muted: oklch(0.13 0.022 280);
+  --muted-foreground: oklch(0.52 0.012 275);
+  --accent: oklch(0.82 0.1 82);
+  --accent-foreground: oklch(0.07 0.018 280);
+  --destructive: oklch(0.65 0.22 25);
+  --border: oklch(1 0 0 / 7%);
+  --input: oklch(1 0 0 / 9%);
+  --ring: oklch(0.62 0.26 280);
+  --chart-1: oklch(0.62 0.26 280);
+  --chart-2: oklch(0.82 0.1 82);
+  --chart-3: oklch(0.55 0.2 200);
+  --chart-4: oklch(0.68 0.18 340);
+  --chart-5: oklch(0.45 0.12 280);
+  --sidebar: oklch(0.055 0.016 280);
+  --sidebar-foreground: oklch(0.88 0.008 275);
+  --sidebar-primary: oklch(0.62 0.26 280);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.12 0.026 280);
+  --sidebar-accent-foreground: oklch(0.96 0.005 275);
+  --sidebar-border: oklch(1 0 0 / 6%);
+  --sidebar-ring: oklch(0.62 0.26 280);
 }
 
 @layer base {
@@ -173,7 +164,49 @@
   h3,
   h4 {
     font-family: var(--font-cormorant), Georgia, serif;
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: 0.02em;
   }
+}
+
+/* ── Utility: Tech Grid Overlay ─────────────────────────────────────────── */
+.brand-grid-dark {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 3.5%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.brand-grid-light {
+  background-image:
+    linear-gradient(oklch(0 0 0 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0 0 0 / 4%) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ── Utility: Gradient Wordmark ─────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(0.58 0.26 280) 0%,
+    oklch(0.68 0.18 295) 40%,
+    oklch(0.72 0.1 82) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Utility: Glass Surface ─────────────────────────────────────────────── */
+.glass-surface {
+  backdrop-filter: blur(24px) saturate(160%);
+  background: oklch(1 0 0 / 4%);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+/* ── Utility: Violet Glow ───────────────────────────────────────────────── */
+.glow-violet {
+  box-shadow:
+    0 0 40px oklch(0.58 0.26 280 / 25%),
+    0 0 80px oklch(0.58 0.26 280 / 12%);
 }
