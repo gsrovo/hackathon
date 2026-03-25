@@ -25,6 +25,7 @@ export function OrgSwitcher() {
     if (!isOpen) return;
     await authClient.organization.setActive({ organizationId: orgId });
     setIsOpen(false);
+    router.push('/dashboard');
     router.refresh();
   }
 
