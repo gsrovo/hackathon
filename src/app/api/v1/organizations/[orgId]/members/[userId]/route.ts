@@ -7,7 +7,7 @@ export const DELETE = withAdmin(async (_req, ctx, _session, _member) => {
   const { orgId, userId } = await ctx.params;
 
   await auth.api.removeMember({
-    body: { userId, organizationId: orgId },
+    body: { memberIdOrEmail: userId, organizationId: orgId },
     headers: await headers(),
   });
 

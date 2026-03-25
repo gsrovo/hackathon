@@ -10,6 +10,14 @@ const CreateOrganizationBodySchema = z.object({
   slug: z.string().optional(),
 });
 
+function toSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export const GET = withAuth(async (_req, _ctx, _session) => {
   const orgs = await auth.api.listOrganizations({
     headers: await headers(),
@@ -25,8 +33,10 @@ export const POST = withAuth(async (req, _ctx, _session) => {
     return err(422, zodFirstIssueMessage(parsed.error));
   }
 
+  const slug = toSlug(parsed.data.slug?.trim() || parsed.data.name);
+
   const org = await auth.api.createOrganization({
-    body: { name: parsed.data.name, slug: parsed.data.slug },
+    body: { name: parsed.data.name, slug },
     headers: await headers(),
   });
 
