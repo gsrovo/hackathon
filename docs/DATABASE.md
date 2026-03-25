@@ -11,7 +11,6 @@
 | `src/lib/db/schema/auth.ts`     | `user`, `session`, `account`, `verification`, `organization`, `member`, `invitation` |
 | `src/lib/db/schema/orders.ts`   | `orders`, `order_items`                                                              |
 | `src/lib/db/schema/products.ts` | `products`                                                                           |
-| `src/lib/db/schema/billing.ts`  | `billing_plans`, `organization_subscriptions`                                        |
 
 ## Table Definitions
 
@@ -116,29 +115,6 @@
 | image_url       | text          | nullable                    |
 | created_at      | timestamp     |                             |
 | updated_at      | timestamp     |                             |
-
-#### `billing_plans`
-
-| Column        | Type          | Notes |
-| ------------- | ------------- | ----- |
-| id            | uuid          | PK    |
-| name          | varchar(100)  |       |
-| price_monthly | numeric(10,2) |       |
-| price_yearly  | numeric(10,2) |       |
-| features      | jsonb         |       |
-
-#### `organization_subscriptions`
-
-| Column               | Type      | Notes                                       |
-| -------------------- | --------- | ------------------------------------------- |
-| id                   | uuid      | PK                                          |
-| organization_id      | text      | FK → organization                           |
-| plan_id              | uuid      | FK → billing_plans                          |
-| status               | text      | active \| trialing \| past_due \| cancelled |
-| current_period_start | timestamp |                                             |
-| current_period_end   | timestamp |                                             |
-| stripe_customer_id   | text      | nullable                                    |
-| stripe_sub_id        | text      | nullable                                    |
 
 ## Commands
 

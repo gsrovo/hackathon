@@ -8,6 +8,13 @@
       "when": 1774434070030,
       "tag": "0000_massive_mephisto",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774435281613,
+      "tag": "0001_hot_stephen_strange",
+      "breakpoints": true
     }
   ]
 }

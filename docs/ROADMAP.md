@@ -24,15 +24,14 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [x] `src/types/api.ts` + `src/types/roles.ts`
 - [x] `src/lib/api/response.ts` + `src/lib/api/middleware.ts` (RBAC HOFs)
 
-### Phase 2 — App Database Schemas
+### Phase 2 — App Database Schemas ✅
 
-> Orders, products, billing tables
+> Orders and products tables (billing/subscriptions out of MVP scope)
 
-- [ ] `src/lib/db/schema/orders.ts` — `orders`, `order_items`
-- [ ] `src/lib/db/schema/products.ts` — `products`
-- [ ] `src/lib/db/schema/billing.ts` — `billing_plans`, `organization_subscriptions`
-- [ ] Update `src/lib/db/schema/index.ts`
-- [ ] Run `pnpm drizzle-kit generate && pnpm drizzle-kit migrate`
+- [x] `src/lib/db/schema/orders.ts` — `orders`, `order_items`
+- [x] `src/lib/db/schema/products.ts` — `products`
+- [x] Update `src/lib/db/schema/index.ts`
+- [x] Run `pnpm db:generate && pnpm db:migrate`
 
 ### Phase 3 — OpenAPI / Swagger Setup ✅
 
@@ -100,12 +99,12 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 - [ ] `src/features/orders/` — components, hooks, lib
 - [ ] `src/app/(dashboard)/orders/page.tsx` + `[id]/page.tsx`
 
-### Phase 9 — Products + Billing
+### Phase 9 — Products
 
-> Product catalog and subscription management
+> Product catalog management (billing/subscriptions out of MVP scope)
 
-- [ ] Route handlers for products and billing
-- [ ] Dashboard widgets for products and billing info
+- [ ] Route handlers for products (`GET`, `POST`, `PATCH`, `DELETE`)
+- [ ] Dashboard widget for product list
 
 ### Phase 10 — Swagger UI (complete)
 
@@ -167,9 +166,6 @@ User account dashboard for a multi-organization e-commerce platform. Users can b
 | GET           | `/api/v1/products`                             | member        |
 | POST          | `/api/v1/products`                             | admin         |
 | PATCH, DELETE | `/api/v1/products/:id`                         | admin / owner |
-| GET           | `/api/v1/billing`                              | admin         |
-| POST          | `/api/v1/billing/checkout`                     | owner         |
-| POST          | `/api/v1/billing/portal`                       | owner         |
 | GET           | `/api/docs`                                    | public        |
 
 ---
