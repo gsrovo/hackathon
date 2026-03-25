@@ -13,10 +13,12 @@ import { GoogleOAuthButton } from '@/features/auth/components/google-oauth-butto
 export default function SignInPage() {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Sign in</CardTitle>
-        <CardDescription>
-          Enter your credentials to access your account
+      <CardHeader className="pb-2">
+        <CardTitle className="font-heading text-3xl font-light tracking-wide">
+          Welcome back
+        </CardTitle>
+        <CardDescription className="tracking-wide">
+          Sign in to your account
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">

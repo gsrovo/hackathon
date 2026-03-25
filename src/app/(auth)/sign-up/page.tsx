@@ -13,9 +13,13 @@ import { GoogleOAuthButton } from '@/features/auth/components/google-oauth-butto
 export default function SignUpPage() {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Create an account</CardTitle>
-        <CardDescription>Get started — it&apos;s free</CardDescription>
+      <CardHeader className="pb-2">
+        <CardTitle className="font-heading text-3xl font-light tracking-wide">
+          Join Maison
+        </CardTitle>
+        <CardDescription className="tracking-wide">
+          Create your exclusive account
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <GoogleOAuthButton />
